@@ -2,6 +2,8 @@ class Grille:
     def __init__(self,n=9):
         self.n=n
         self.creerMatriceAdjacenceGrapheContrainte()
+        self.grille=[[0 for i in range(n)] for j in range(n)]
+        self.afficherGrille()
     def memeLigne(self,coordA, coordB):
         return coordA[0]==coordB[0]
     def memeColonne(self,coordA, coordB):
@@ -21,6 +23,14 @@ class Grille:
                         index1=n*i1+j1
                         if((self.memeLigne(coordA,coordB) or self.memeColonne(coordA,coordB) or self.memeBloc(coordA,coordB)) and coordA!=coordB):
                            self.matriceAdjacenceGrapheContrainte[index][index1]=1
+    def afficherGrille(self):
+        n=self.n
+        grille=self.grille
+        for i in range(n):
+            ligne="|"
+            for j in range(n):
+                ligne+=str(grille[i][j])+"|"
+            print(ligne)
 
 
 
