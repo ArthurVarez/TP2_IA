@@ -32,5 +32,13 @@ class Grille:
                 ligne+=str(grille[i][j])+"|"
             print(ligne)
 
+    def ImportSudoku(self,path):
+        grid = list()
+        with open(path) as f:
+            for line in f:
+                temp = [0 if x=="_" else int(x) for x in line.strip().split(" ") if x!=""]
+                grid.append(temp)
+        self.grille = grid
+
 
 
