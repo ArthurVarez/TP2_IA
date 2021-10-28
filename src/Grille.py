@@ -143,9 +143,9 @@ class Grille:
 
         def recursiveBacktracking(grille,csp,matricePossibilites):
             if(grilleComplete(grille)):
-                return grille
+                return (grille,matricePossibilites)
             var = selectionnerVariableNonAssignee(grille,csp)
-            valeursAutorisees = matricePossibilites[var[0]][var[1]]
+            valeursAutorisees = setValeursAutorisees(var,grille,csp)
             orderDomainValues = [i for i in range(1,n+1)]
             for value in orderDomainValues:
                 if(value in valeursAutorisees):
@@ -163,7 +163,8 @@ class Grille:
         n=self.n
         csp = self.matriceAdjacenceGrapheContrainte
         matricePossibilites = setMatricePossibilites(grille,csp)
-        return recursiveBacktracking(grille,csp, matricePossibilites)
+        return recursiveBacktracking(grille,csp, matricePossibilites)[0]
+
 
 grille = Grille()
 path =r"C:\Users\Cyril\Documents\Cours UQAC\IA\TP2\git\TP2_IA\sudokus\sudoku2.txt"
