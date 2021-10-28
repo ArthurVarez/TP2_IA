@@ -87,6 +87,32 @@ class Grille:
         return recursiveBacktracking(grille)
 
     def backtrackingSearchMRV(self):
+        def setMatricePossibilites(grille,csp):
+            matricePossibilites = [[[] for i in range(n)] for j in range(n)]
+            for i in range(n):
+                for j in range(n):
+                    if(grille[i][j]==0):
+                        matricePossibilites[i][j]=setValeursAutorisees([i,j], grille, csp)
+                    else:
+                        matricePossibilites[i][j]=[]
+            return matricePossibilites
+        def deleteMatricePossibilites(matricePossibilites, var, value, csp):
+            index=var[0]*n+var[1]
+            for index1 in range(n**2):
+                if(csp[index][index1]):
+                    j=index1%n
+                    i=(index1-j)//n
+                    if(value in matricePossibilites[i][j]):
+                        matricePossibilites[i][j].remove(value)
+
+        def addMatricePossibilites(matricePossibilites, var, value, csp):
+            index=var[0]*n+var[1]
+            for index1 in range(n**2):
+                if(csp[index][index1]):
+                    j=index1%n
+                    i=(index1-j)//n
+                    if(value not in matricePossibilites[i][j]):
+                        matricePossibilites[i][j].append(value)
         def grilleComplete(grille):
             for i in range(n):
                 for j in range(n):
@@ -109,30 +135,35 @@ class Grille:
             var=[0,0]
             for i in range(n):
                 for j in range(n):
-                    possibilites = setValeursAutorisees([i,j],grille,csp)
+                    possibilites = matricePossibilites[i][j]
                     if(grille[i][j]==0 and len(possibilites)<nBValeurLegales):
                         nBValeurLegales = len(possibilites)
                         var=[i,j]
             return var
 
-        def recursiveBacktracking(grille,csp):
+        def recursiveBacktracking(grille,csp,matricePossibilites):
             if(grilleComplete(grille)):
                 return grille
             var = selectionnerVariableNonAssignee(grille,csp)
-            valeursAutorisees = setValeursAutorisees(var, grille, csp)
+            valeursAutorisees = matricePossibilites[var[0]][var[1]]
             orderDomainValues = [i for i in range(1,n+1)]
             for value in orderDomainValues:
                 if(value in valeursAutorisees):
                     grille[var[0]][var[1]]=value
-                    result = recursiveBacktracking(grille,csp)
+                    matricePossibilites[var[0]][var[1]].remove(value)
+                    deleteMatricePossibilites(matricePossibilites,var,value,csp)
+                    result = recursiveBacktracking(grille,csp, matricePossibilites)
                     if(result!=-1):
                         return result
                     grille[var[0]][var[1]]=0
+                    matricePossibilites[var[0]][var[1]].append(value)
+                    addMatricePossibilites(matricePossibilites,var,value,csp)
             return -1
         grille=self.grille
-        csp = self.matriceAdjacenceGrapheContrainte
         n=self.n
-        return recursiveBacktracking(grille,csp)
+        csp = self.matriceAdjacenceGrapheContrainte
+        matricePossibilites = setMatricePossibilites(grille,csp)
+        return recursiveBacktracking(grille,csp, matricePossibilites)
 
 grille = Grille()
 path =r"C:\Users\Cyril\Documents\Cours UQAC\IA\TP2\git\TP2_IA\sudokus\sudoku2.txt"
@@ -142,7 +173,8 @@ print("\n")
 start= time.time()
 grille.backtrackingSearch()
 end = time.time()
-print(end-start)
+temps1=end-start
+print(temps1," secondes")
 grille.afficherGrille()
 print("############")
 grille.ImportSudoku(path)
@@ -151,6 +183,9 @@ print("\n")
 start = time.time()
 grille.backtrackingSearchMRV()
 end=time.time()
-print(end-start)
+temps2=end-start
+print(temps2," secondes")
+rapport = 100-int(temps2/temps1*100)
+print("Rédution du temps de ", rapport," %")
 grille.afficherGrille()
 
