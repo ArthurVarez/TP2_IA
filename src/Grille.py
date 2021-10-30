@@ -34,8 +34,12 @@ class Grille:
         grille=self.grille
         for i in range(n):
             ligne="|"
+            if((i)%3==0):
+                print("-"*(self.n+self.n//3))
             for j in range(n):
-                ligne+=str(grille[i][j])+"|"
+                ligne+=str(grille[i][j])
+                if((j+1)%3==0 and j!=0):
+                    ligne+="|"
             print(ligne)
 
     def importSudoku(self, name):
@@ -56,26 +60,5 @@ if __name__ == '__main__':
     
     grille = Grille("sudoku2")
     
-    # path =r"C:\Users\robin\OneDrive - ESME\Cours\ESME\5eme année\IA\TP\TP2\sudokus\sudoku2.txt"
-    # grille.importSudoku(path)
-    # grille.afficherGrille()
-    # print("\n")
-    # start= time.time()
-    # grille.backtrackingSearch()
-    # end = time.time()
-    # temps1=end-start
-    # print(temps1," secondes")
-    # grille.afficherGrille()
-    # print("############")
-    # grille.importSudoku(path)
-    # grille.afficherGrille()
-    # print("\n")
-    # start = time.time()
-    # grille.backtrackingSearchMRV()
-    # end=time.time()
-    # temps2=end-start
-    # print(temps2," secondes")
-    # rapport = 100-int(temps2/temps1*100)
-    # print("Rédution du temps de ", rapport," %")
-    # grille.afficherGrille()
+
 

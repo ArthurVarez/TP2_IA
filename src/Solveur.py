@@ -16,6 +16,8 @@ class Solveur:
             self.backtrackingSearchMRV()
         else:
             self.backtrackingSearch()
+            
+
         
     def backtrackingSearch(self):
         def grilleComplete(grille):
@@ -62,6 +64,12 @@ class Solveur:
         return recursiveBacktracking(grille)
 
     def backtrackingSearchMRV(self):
+        def grilleComplete(grille):
+            for i in range(n):
+                for j in range(n):
+                    if(grille[i][j]==0):
+                        return False
+            return True
         def setMatricePossibilites(grille,csp):
             matricePossibilites = [[[] for i in range(n)] for j in range(n)]
             for i in range(n):
@@ -88,12 +96,6 @@ class Solveur:
                     i=(index1-j)//n
                     if(value not in matricePossibilites[i][j]):
                         matricePossibilites[i][j].append(value)
-        def grilleComplete(grille):
-            for i in range(n):
-                for j in range(n):
-                    if(grille[i][j]==0):
-                        return False
-            return True
 
         def setValeursAutorisees(var, grille, csp):
             index = var[0]*n+var[1]
@@ -118,7 +120,7 @@ class Solveur:
 
         def recursiveBacktracking(grille,csp,matricePossibilites):
             if(grilleComplete(grille)):
-                return (grille,matricePossibilites)
+                return (grille, matricePossibilites)
             var = selectionnerVariableNonAssignee(grille,csp)
             valeursAutorisees = setValeursAutorisees(var,grille,csp)
             orderDomainValues = [i for i in range(1,n+1)]
@@ -135,7 +137,8 @@ class Solveur:
                     addMatricePossibilites(matricePossibilites,var,value,csp)
             return -1
         grille=self.grille.grille
-        n=self.grille.n
         csp = self.grille.matriceAdjacenceGrapheContrainte
+        n=self.grille.n
         matricePossibilites = setMatricePossibilites(grille,csp)
+        
         return recursiveBacktracking(grille,csp, matricePossibilites)[0]
