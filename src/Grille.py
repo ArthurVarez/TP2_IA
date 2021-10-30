@@ -53,28 +53,29 @@ class Grille:
     
 
 if __name__ == '__main__':
-
-    grille = Grille("test")
-    path =r"C:\Users\robin\OneDrive - ESME\Cours\ESME\5eme année\IA\TP\TP2\sudokus\sudoku2.txt"
-    grille.importSudoku(path)
-    grille.afficherGrille()
-    print("\n")
-    start= time.time()
-    grille.backtrackingSearch()
-    end = time.time()
-    temps1=end-start
-    print(temps1," secondes")
-    grille.afficherGrille()
-    print("############")
-    grille.importSudoku(path)
-    grille.afficherGrille()
-    print("\n")
-    start = time.time()
-    grille.backtrackingSearchMRV()
-    end=time.time()
-    temps2=end-start
-    print(temps2," secondes")
-    rapport = 100-int(temps2/temps1*100)
-    print("Rédution du temps de ", rapport," %")
-    grille.afficherGrille()
+    
+    grille = Grille("sudoku2")
+    
+    # path =r"C:\Users\robin\OneDrive - ESME\Cours\ESME\5eme année\IA\TP\TP2\sudokus\sudoku2.txt"
+    # grille.importSudoku(path)
+    # grille.afficherGrille()
+    # print("\n")
+    # start= time.time()
+    # grille.backtrackingSearch()
+    # end = time.time()
+    # temps1=end-start
+    # print(temps1," secondes")
+    # grille.afficherGrille()
+    # print("############")
+    # grille.importSudoku(path)
+    # grille.afficherGrille()
+    # print("\n")
+    # start = time.time()
+    # grille.backtrackingSearchMRV()
+    # end=time.time()
+    # temps2=end-start
+    # print(temps2," secondes")
+    # rapport = 100-int(temps2/temps1*100)
+    # print("Rédution du temps de ", rapport," %")
+    # grille.afficherGrille()
 
