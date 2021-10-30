@@ -9,7 +9,7 @@ from Grille import Grille
 from Solveur import Solveur
 import time
 
-grille = Grille("sudoku1")
+grille = Grille()
 
 solveur = Solveur(grille, True)
 print("Avant\n")

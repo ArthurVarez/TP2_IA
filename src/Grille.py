@@ -1,8 +1,8 @@
-import time, os
+import os.path, random
 
 
 class Grille:
-    def __init__(self, name, n=9):
+    def __init__(self, name="", n=9):
         self.n=n
         self.matriceAdjacenceGrapheContrainte = self.creerMatriceAdjacenceGrapheContrainte()
         self.grille = self.importSudoku(name)
@@ -33,21 +33,28 @@ class Grille:
         n=self.n
         grille=self.grille
         for i in range(n):
-            ligne="|"
+            ligne="| "
             if((i)%3==0):
                 print("-"*(self.n+self.n//3))
             for j in range(n):
                 ligne+=str(grille[i][j])
                 if((j+1)%3==0 and j!=0):
-                    ligne+="|"
+                    ligne+=" | "
             print(ligne)
 
     def importSudoku(self, name):
-        grid = list()
         script_dir = os.path.dirname(__file__)
-        rel_path = "../sudokus/{}.txt".format(name)
-        abs_file_path = os.path.join(script_dir, rel_path)
-        with open(abs_file_path) as f:
+        sudokus_folder = os.path.join(script_dir, "../sudokus/")
+        if name=="":
+            name = random.choice(os.listdir(sudokus_folder))
+            print(name)
+        else:
+            name+=".txt"
+        grid = list()
+        #print(random.choice(os.listdir(r"C:\Users\robin\OneDrive - ESME\Cours\ESME\5eme année\IA\TP\TP2\git\TP2_IA\sudokus")))
+        sudoku_file = sudokus_folder+name
+        #abs_file_path = os.path.join(script_dir, rel_path)
+        with open(sudoku_file) as f:
             for line in f:
                 temp = [0 if x=="_" else int(x) for x in line.strip().split(" ") if x!=""]
                 if(len(temp)!=0):
