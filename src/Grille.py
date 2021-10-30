@@ -40,7 +40,7 @@ class Grille:
 
     def importSudoku(self, name):
         grid = list()
-        script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+        script_dir = os.path.dirname(__file__)
         rel_path = "../sudokus/{}.txt".format(name)
         abs_file_path = os.path.join(script_dir, rel_path)
         with open(abs_file_path) as f:
