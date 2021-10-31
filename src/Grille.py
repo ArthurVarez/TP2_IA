@@ -41,7 +41,7 @@ class Grille:
                 if((j+1)%3==0 and j!=0):
                     ligne+=" | "
             print(ligne)
-        print("-"*int(3.1*(self.n+self.n//3)))
+        print("–"*int(3.1*(self.n+self.n//3)))
 
     def importSudoku(self, name):
         script_dir = os.path.dirname(__file__)
