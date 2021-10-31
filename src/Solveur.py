@@ -9,15 +9,13 @@ class Solveur:
     
     def __init__(self, grille, optimised=True):
         self.grille = grille
-        self.optimised = optimised;
+        self.optimised = optimised
         
     def resoudreSudodu(self):
         if(self.optimised):
             self.backtrackingSearchMRV()
         else:
             self.backtrackingSearch()
-            
-
         
     def backtrackingSearch(self):
         def grilleComplete(grille):
@@ -123,8 +121,7 @@ class Solveur:
                 return (grille, matricePossibilites)
             var = selectionnerVariableNonAssignee(grille,csp)
             valeursAutorisees = setValeursAutorisees(var,grille,csp)
-            orderDomainValues = [i for i in range(1,n+1)]
-            for value in orderDomainValues:
+            for value in range(1, n+1):
                 if(value in valeursAutorisees):
                     grille[var[0]][var[1]]=value
                     matricePossibilites[var[0]][var[1]].remove(value)

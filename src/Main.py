@@ -11,7 +11,7 @@ import time
 
 grille = Grille("sudoku2")
 
-solveur = Solveur(grille, False)
+solveur = Solveur(grille, True)
 print("Avant\n")
 grille.afficherGrille()
 t1 = time.time()
