@@ -133,20 +133,20 @@ class Solveur:
                         compteur_valeurs_autorisees[valeurs_autorisees.index(val_voisin)]+=1
             valeurs_autorisees_triee, compteur_trie =zip(*sorted(zip(valeurs_autorisees, compteur_valeurs_autorisees)))
         
-            #return valeurs_autorisees_triee[0]
-            return valeurs_autorisees_triee
+            return valeurs_autorisees_triee[0]
+            #return valeurs_autorisees_triee
 
         def recursiveBacktracking(grille,csp, matricePossibilites):
             if(grilleComplete(grille)):
                 return (grille, matricePossibilites)
             var = selectionnerVariableNonAssignee(grille)
 
-            #valeursAutorisees = matricePossibilites[var[0]][var[1]]
-            valeursAutorisees = chooseBestValue(var, matricePossibilites)
+            valeursAutorisees = matricePossibilites[var[0]][var[1]]
+            #valeursAutorisees = chooseBestValue(var, matricePossibilites)
             
-            #for i in range(len(valeursAutorisees)):
-            #    value = chooseBestValue(var, matricePossibilites)
-            for value in valeursAutorisees:
+            for i in range(len(valeursAutorisees)):
+                value = chooseBestValue(var, matricePossibilites)
+            #for value in valeursAutorisees:
                 grille[var[0]][var[1]]=value
                 matricePossibilites[var[0]][var[1]].remove(value)
                 deleteMatricePossibilites(matricePossibilites,var,value,csp)
