@@ -118,8 +118,8 @@ class Solveur:
 
         def chooseBestValue(var, matrice_possibilite):
             valeurs_autorisees = matrice_possibilite[var[0]][var[1]]
-            if valeurs_autorisees==[]:
-                return []
+            #if valeurs_autorisees==[]:
+            #    return []
             compteur_valeurs_autorisees = [0 for i in range(len(valeurs_autorisees))]
             
             index = var[0]*n+var[1]
