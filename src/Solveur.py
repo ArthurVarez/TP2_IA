@@ -132,8 +132,6 @@ class Solveur:
                     if val_voisin in valeurs_autorisees:
                         compteur_valeurs_autorisees[valeurs_autorisees.index(val_voisin)]+=1
             valeurs_autorisees_triee, compteur_trie =zip(*sorted(zip(valeurs_autorisees, compteur_valeurs_autorisees)))
-            #print(valeurs_autorisees, compteur_valeurs_autorisees)
-            #print(valeurs_autorisees_triee, compteur_trie)
         
             #return valeurs_autorisees_triee[0]
             return valeurs_autorisees_triee
