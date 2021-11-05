@@ -64,9 +64,3 @@ class Grille:
 
 
 
-if __name__ == '__main__':
-
-    grille = Grille("sudoku2")
-
-
-
