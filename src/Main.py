@@ -8,16 +8,39 @@ Created on Fri Oct 29 23:43:02 2021
 from Grille import Grille
 from Solveur import Solveur
 import time
+import glob
+import os
+def afficherListeSudoku():
+    for fichier in glob.glob("../sudokus/*.txt"):
+        print(fichier)
+def verifierFichier(fichier):
+    return os.path.isfile("../sudokus/"+fichier+".txt")
 
-grille = Grille("sudoku3")
+continuer = True
+fichierInvalide= True
+grille = Grille()
+solveur = Solveur()
+print("Bienvenue dans le solveur de sudoku !")
+while(continuer):
+    print("Choisissez le sudoku à résoudre (ex: tapez sudoku1 pour sudoku1.txt)\n")
+    afficherListeSudoku()
+    fichier = input()
+    fichierInvalide=True
+    while(fichierInvalide):
+        if(verifierFichier(fichier)):
+            fichierInvalide=False
+            grille.setGrille(fichier)
+            print("Vous avez choisi le sudoku suivant à résoudre:\n")
+            grille.afficherGrille()
+            print("Lancement de la résolution ...")
+            solveur.setGrille(grille)
+            grille.grille=solveur.backtrackingSearchMRV_LCV()
+            print("Affichage de la solution")
+            grille.afficherGrille()
+            continuer=input("Souhaitez-vous continuer à résoudre des sudokus ? 1 - Oui 2 - Non\n")=="1"
 
-solveur = Solveur(grille, True)
-print("Avant\n")
-grille.afficherGrille()
-t1 = time.time()
-solveur.resoudreSudodu()
-t2 = time.time()
-print("temps : {}".format(t2-t1))
-print("\nApres\n")
-grille.afficherGrille()
+        else:
+            print("Fichier inexistant ! Veuillez réessayer !")
+            fichierInvalide=True
+
 

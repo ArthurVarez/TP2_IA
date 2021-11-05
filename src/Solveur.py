@@ -6,10 +6,11 @@ Created on Fri Oct 29 23:45:03 2021
 """
 import math, time
 class Solveur:
-    
-    def __init__(self, grille, optimised=True):
-        self.grille = grille
-        self.optimised = optimised
+    def __init__(self):
+        self.grille=None
+        self.optimised=True
+    def setGrille(self,grille):
+        self.grille=grille
         
     def resoudreSudodu(self):
         if(self.optimised):

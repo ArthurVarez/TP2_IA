@@ -2,11 +2,15 @@ import os.path, random
 
 
 class Grille:
-    def __init__(self, name="", n=9):
-        self.n=n
-        self.matriceAdjacenceGrapheContrainte = self.creerMatriceAdjacenceGrapheContrainte()
-        self.grille = self.importSudoku(name)
-        
+    def __init__(self):
+        self.n=9
+        self.matriceAdjacenceGrapheContrainte=None
+        self.grille=None
+    def setGrille(self, fichier):
+        self.grille = self.importSudoku(fichier)
+        self.matriceAdjacenceGrapheContrainte=self.creerMatriceAdjacenceGrapheContrainte()
+
+
     def memeLigne(self,coordA, coordB):
         return coordA[0]==coordB[0]
     def memeColonne(self,coordA, coordB):
@@ -46,11 +50,7 @@ class Grille:
     def importSudoku(self, name):
         script_dir = os.path.dirname(__file__)
         sudokus_folder = os.path.join(script_dir, "../sudokus/")
-        if name=="":
-            name = random.choice(os.listdir(sudokus_folder))
-            print(name)
-        else:
-            name+=".txt"
+        name+=".txt"
         grid = list()
         #print(random.choice(os.listdir(r"C:\Users\robin\OneDrive - ESME\Cours\ESME\5eme année\IA\TP\TP2\git\TP2_IA\sudokus")))
         sudoku_file = sudokus_folder+name
@@ -62,11 +62,11 @@ class Grille:
                     grid.append(temp)
         return grid
 
-    
+
 
 if __name__ == '__main__':
-    
+
     grille = Grille("sudoku2")
-    
+
 
 
