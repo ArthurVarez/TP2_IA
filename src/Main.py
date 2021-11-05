@@ -9,9 +9,9 @@ from Grille import Grille
 from Solveur import Solveur
 import time
 
-grille = Grille("sudoku2")
+grille = Grille("sudoku3")
 
-solveur = Solveur(grille, True)
+solveur = Solveur(grille, False)
 print("Avant\n")
 grille.afficherGrille()
 t1 = time.time()
