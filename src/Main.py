@@ -10,6 +10,7 @@ from Solveur import Solveur
 import time
 import glob
 import os
+
 def afficherListeSudoku():
     for fichier in glob.glob("../sudokus/*.txt"):
         print(fichier)
@@ -22,11 +23,12 @@ grille = Grille()
 solveur = Solveur()
 print("Bienvenue dans le solveur de sudoku !")
 while(continuer):
-    print("Choisissez le sudoku à résoudre (ex: tapez sudoku1 pour sudoku1.txt)\n")
-    afficherListeSudoku()
-    fichier = input()
     fichierInvalide=True
     while(fichierInvalide):
+        print("Choisissez le sudoku à résoudre (ex: tapez sudoku1 pour sudoku1.txt)\n")
+        afficherListeSudoku()
+        fichier = input()
+        print(fichier)
         if(verifierFichier(fichier)):
             fichierInvalide=False
             grille.setGrille(fichier)
